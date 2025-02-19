@@ -10,7 +10,7 @@ This does exactly what I need; I don't plan to change much.
 
 - [rbw](https://github.com/doy/rbw)
 - [jq](https://github.com/stedolan/jq) - JSON parser
-- [wofi](https://hg.sr.ht/~scoopta/wofi) - Optional menu GUI. Trivial to replace with dmenu, bemenu, fzf, or whatever else.
+- [rofi](https://github.com/davatorium/rofi) - Optional menu GUI. Trivial to replace with dmenu, bemenu, fzf, or whatever else.
 
 ## Installation
 
