@@ -19,12 +19,14 @@ IFS='
 # necessary.
 rbw unlocked >/dev/null 2>&1 || rbw unlock
 
+rbw sync  # Sync Bitwarden before loading the dmenu
+
 query=${1:-username}
 
 chosen_item=$(
 	# If RBW_MENU_COMMAND is unset, use wofi
 	if [ "${RBW_MENU_COMMAND:-}" = "" ]; then
-		rbw list | wofi --dmenu --matching fuzzy --insensitive --prompt "$query"
+		rbw list | rofi -dmenu --matching fuzzy -i -mesg "$query"
 	else
 		eval "rbw list | $RBW_MENU_COMMAND"
 	fi
@@ -40,5 +42,7 @@ code)
 *)
 	# Select chosen item from vault, return login.query
 	rbw get "$chosen_item" --raw | jq --join-output ".data.$query"
+  sleep 5 
+  echo  | xclip -sel clip # Clearing Clipboard after 5 Seconds.
 	;;
 esac
