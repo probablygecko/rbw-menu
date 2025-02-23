@@ -26,7 +26,7 @@ query=${1:-username}
 chosen_item=$(
 	# If RBW_MENU_COMMAND is unset, use wofi
 	if [ "${RBW_MENU_COMMAND:-}" = "" ]; then
-		rbw list | rofi -dmenu --matching fuzzy -i -mesg "$query"
+		rbw list | rofi -normal-window -dmenu --matching fuzzy -i -mesg "$query"
 	else
 		eval "rbw list | $RBW_MENU_COMMAND"
 	fi
@@ -41,7 +41,7 @@ code)
 	;;
 *)
 	# Select chosen item from vault, return login.query
-	rbw get "$chosen_item" --raw | jq --join-output ".data.$query"
+	rbw get "$chosen_item" --raw | jq --join-output ".data.$query" | xclip -sel clip
   sleep 5 
   echo  | xclip -sel clip # Clearing Clipboard after 5 Seconds.
 	;;
